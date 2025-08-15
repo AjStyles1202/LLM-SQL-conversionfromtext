@@ -1,43 +1,122 @@
-# LLM-SQL-conversionfromtext
-This is an end to end LLM project based on Google Palm and Langchain. I build a system that can talk to MySQL database! User asks questions in a natural language and the system generates answers by converting those questions to an SQL query and then executing that query on MySQL database. Created a database on MySQL where a company might maintain their inventory, sales, and discounts data inside. A store manager may ask questions such as,
+#  LLM-SQL Conversion from Natural Language
 
-How many white color Adidas t shirts do we have left in the stock?
-How much sales our store will generate if we can sell all extra-small size t shirts after applying discounts? The system is intelligent enough to generate accurate queries for given question and execute them on MySQL database
-Project Highlights
-I build an LLM based question and answer system that will use following,
-Google Palm LLM
-Hugging face embeddings
-Streamlit for UI
-Langchain framework
-Chromadb as a vector store
-Few shot learning
-In the UI, you can ask questions in a natural language and it will produce the answers
-Installation
-1.Clone this repository to your local machine using:
+**An End-to-End LLM + LangChain project that connects directly to a MySQL database and answers business queries in plain English.**
 
-  git clone https://github.com/codebasics/langchain.git
-2.Navigate to the project directory:
+With this system, a store manager can simply type:
 
-  cd 4_sqldb_tshirts
-Install the required dependencies using pip:
-  pip install -r requirements.txt
-4.Acquire an api key through makersuite.google.com and put it in .env file
+> *"How many white Adidas t-shirts are left in stock?"*
+> and get the exact answer — powered by **Google Gemini (PaLM)**, **LangChain**, and **MySQL**.
 
-  GOOGLE_API_KEY="your_api_key_here"
-For database setup, run database/db_creation_atliq_t_shirts.sql in your MySQL workbench
-Usage
-Run the Streamlit app by executing:
+---
+
+## Features
+
+* **Natural Language to SQL** – Convert user questions into syntactically correct SQL queries.
+* **Database-Backed Intelligence** – Runs queries directly on a live MySQL database.
+* **Few-Shot Learning** – Improves query generation accuracy using curated examples.
+* **Hugging Face Embeddings + ChromaDB** – Vector store for semantic similarity search.
+* **Streamlit UI** – Clean, interactive interface for non-technical users.
+* **Real-World Use Case** – Designed for a retail scenario (inventory, sales, discounts).
+
+---
+
+##  Example Queries
+
+* How many total t-shirts are left in stock?
+* How many XS-size white Nike t-shirts are available?
+* What is the total price of inventory for all S-size t-shirts?
+* If we sell all small Adidas shirts today after discounts, how much revenue will we generate?
+
+---
+
+## Tech Stack
+
+* **LLM:** Google Gemini (PaLM API via LangChain)
+* **Framework:** LangChain
+* **Embeddings:** HuggingFace `all-MiniLM-L6-v2`
+* **Vector Store:** ChromaDB
+* **UI:** Streamlit
+* **Database:** MySQL
+* **Prompting:** Few-Shot Examples
+
+---
+
+## Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/AjStyles1202/LLM-SQL-conversionfromtext.git
+   cd LLM-SQL-conversionfromtext
+   ```
+
+2. **Create a virtual environment** (optional but recommended)
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate     # Mac/Linux
+   venv\Scripts\activate        # Windows
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Get your Google API key**
+
+   * Visit [MakerSuite](https://makersuite.google.com/)
+   * Create a `.env` file in the project root:
+
+     ```env
+     GOOGLE_API_KEY="your_api_key_here"
+     ```
+
+5. **Set up the database**
+
+   * Start your MySQL server.
+   * Run the SQL script:
+
+     ```sql
+     SOURCE database/db_creation_atliq_t_shirts.sql;
+     ```
+
+---
+
+## ▶️ Usage
+
+Run the Streamlit app:
+
+```bash
 streamlit run main.py
-2.The web app will open in your browser where you can ask questions
+```
 
-Sample Questions
-How many total t shirts are left in total in stock?
-How many t-shirts do we have left for Nike in XS size and white color?
-How much is the total price of the inventory for all S-size t-shirts?
-How much sales amount will be generated if we sell all small size adidas shirts today after discounts?
-Project Structure
-main.py: The main Streamlit application script.
-langchain_helper.py: This has all the langchain code
-requirements.txt: A list of required Python packages for the project.
-few_shots.py: Contains few shot prompts
-.env: Configuration file for storing your Google API key.
+The app will open in your browser. Type your question in natural language, and the system will:
+
+1. Convert it to SQL
+2. Run the query
+3. Display the result
+
+---
+
+## 📂 Project Structure
+
+```
+├── main.py                  # Streamlit UI
+├── langchain_helper.py      # LangChain logic & query generation
+├── few_shots.py             # Few-shot examples
+├── requirements.txt         # Project dependencies
+├── database/
+│   └── db_creation_atliq_t_shirts.sql
+└── .env                     # API key & environment variables
+```
+
+---
+
+## 💡 Future Improvements
+
+* Support for **multiple databases** (PostgreSQL, SQLite).
+* Add **chart/graph visualizations** for query results.
+* Integrate **user authentication** for secure access.
+* Fine-tune LLM for specific domain vocabularies.
